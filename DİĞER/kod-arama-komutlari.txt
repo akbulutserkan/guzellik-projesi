@@ -1,0 +1,12 @@
+Aşağıdaki komutları kullanarak tüm kaynak kodunuzda "mcp1" geçen yerleri bulabilirsiniz:
+
+# Tüm .js, .jsx, .ts, .tsx dosyalarında ara
+grep -r "mcp1" --include="*.js" --include="*.jsx" --include="*.ts" --include="*.tsx" /Users/serkan/Desktop/claude/src
+
+# Derlenen JavaScript dosyalarında ara
+grep -r "mcp1" --include="*.js" /Users/serkan/Desktop/claude/.next
+
+# Build klasöründe ara
+grep -r "mcp1" /Users/serkan/Desktop/claude/.next/static
+
+Bu komutlar, kodunuzda "mcp1" geçen tüm yerleri bulacaktır. Bu sayede kalıcı çözüm için hangi dosyaları düzenlemeniz gerektiğini anlayabilirsiniz.

@@ -1,0 +1,43 @@
+'use client';
+
+/**
+ * @deprecated Bu hook artık kullanımdan kaldırılmıştır.
+ * Lütfen bunun yerine '@/hooks/useCalendarManagement' kullanın.
+ * 
+ * Merkezi ve dengeli mimari yapısında:
+ * - Veri çekme: /services/calendarService.ts
+ * - State yönetimi: /hooks/useCalendarManagement.ts
+ * - Formatlama işlemleri: /utils/calendar/formatters.ts
+ */
+
+import { Staff, Appointment } from '@/types/appointment';
+import { useCalendarManagement } from '@/hooks/useCalendarManagement';
+
+// Tür tanımlamaları (geriye dönük uyumluluk için)
+export interface UpdateEventArgs {
+  event: Appointment; 
+  start: Date; 
+  end: Date; 
+  resourceId?: string;
+}
+
+// Yeni yapıya yönlendirme
+export const useCalendarData = (showDetailModal: boolean, selectedEvent: Appointment | null) => {
+  console.warn(
+    'useCalendarData artık kullanımdan kaldırılmıştır. ' +
+    'Lütfen bunun yerine @/hooks/useCalendarManagement kullanın.'
+  );
+  
+  // Merkezi hook'a yönlendir
+  const hook = useCalendarManagement();
+  
+  // Geriye dönük uyumluluk için eski arayüzü simüle et
+  return {
+    staff: hook.staff,
+    events: hook.events,
+    loading: hook.loading,
+    error: hook.error || '',
+    fetchCalendarData: hook.refreshCalendar,
+    updateEventAfterDrag: hook.updateEventAfterDrag
+  };
+};

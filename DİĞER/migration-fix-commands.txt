@@ -1,0 +1,16 @@
+Aşağıdaki komutları sırayla çalıştırınız:
+
+# 1. Çakışan migration klasörünü kaldır
+rm -rf /Users/serkan/Desktop/claude/prisma/migrations/20250314_add_project_data_model
+
+# 2. Prisma migration tablosunu temizle
+psql -d appointment_system -c "DELETE FROM _prisma_migrations WHERE migration_name = '20250314_add_project_data_model';"
+
+# 3. Şimdi, migration'ları yeniden oluştur
+npx prisma migrate dev --name add_service_price_history
+
+# Eğer bu başarısız olursa, önce db push ile şemayı uyumlu hale getir
+# npx prisma db push --accept-data-loss
+
+# Sonra tekrar migration oluştur
+# npx prisma migrate dev --name add_service_price_history

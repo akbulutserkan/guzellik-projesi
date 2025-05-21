@@ -1,0 +1,103 @@
+/* Çok daha agresif ve kapsamlı stil düzeltmeleri */
+
+/* Tüm olası select ve dropdown yapıları */
+[role="combobox"],
+.select,
+select,
+[class*="select"],
+[class*="dropdown"],
+[class*="combobox"],
+.combobox,
+.dropdown,
+[data-value],
+[data-slot="trigger"],
+[data-state] {
+  max-width: 100% !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+/* İçlerindeki tüm metinler */
+[role="combobox"] span, 
+[role="combobox"] div,
+[class*="select"] span,
+[class*="select"] div,
+[class*="combobox"] span,
+[class*="combobox"] div,
+[class*="dropdown"] span,
+[class*="dropdown"] div,
+[data-value] span,
+[data-value] div,
+[data-slot="trigger"] span,
+[data-slot="trigger"] div,
+[data-state] span,
+[data-state] div {
+  max-width: 100% !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  display: inline-block !important;
+}
+
+/* Modal içindeki personel seçici için çok spesifik stil */
+.DialogContent div:has(> [role="combobox"]),
+.DialogContent div:has(> select),
+.DialogContent div:has(> [class*="select"]) {
+  max-width: 100% !important;
+  overflow: hidden !important;
+}
+
+/* Her türlü yazı içeriği için genel kurallar */
+button, 
+span, 
+label, 
+div[class*="value"], 
+[class*="value"],
+[class*="trigger"],
+[class*="content"] {
+  max-width: 100% !important;
+}
+
+/* Radix UI için özel seçiciler */
+[data-radix-select-trigger],
+[data-radix-select-value],
+[data-radix-select-content],
+[data-radix-select-item],
+[data-radix-dropdown-menu-content],
+[data-radix-dropdown-menu-item] {
+  max-width: 100% !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important; 
+  white-space: nowrap !important;
+}
+
+/* Shadcn UI sınıfları */
+.fixed.z-50.mt-1.w-auto.min-w-\[500px\],
+.select-trigger,
+.select-value,
+.select-content,
+.select-item {
+  max-width: 100% !important; 
+  text-overflow: ellipsis !important;
+  overflow: hidden !important;
+}
+
+/* Uygulama özel sınıfları - personel seçici */
+div:has(> [value="Mehmet Kaya"]),
+div:has(> [value="Zeynep Demir"]),
+div:has(> [value*="Ayşe"]) {
+  max-width: 100% !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+/* Çözüm çalışmazsa, CSS içerikleri zorla değiştiren bir yöntem */
+[style*="overflow: visible"],
+[style*="overflow:visible"],
+[style*="white-space: normal"],
+[style*="white-space:normal"] {
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  text-overflow: ellipsis !important;
+}

@@ -1,0 +1,24 @@
+/* Personel isimlerinin kısaltılması için stil kural */
+
+.rbc-row {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* SelectTrigger elementleri için */
+div[role="combobox"] {
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Personel isimlerinin kısaltılması */
+div[role="combobox"] span {
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}

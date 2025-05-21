@@ -1,0 +1,49 @@
+/* Saat çizgileri */
+.rbc-time-content .rbc-time-slot {
+  border-top: 1px solid var(--border-color);
+  height: 22px;
+}
+
+/* Saat gösterge alanı için özel stiller */
+.rbc-time-view .rbc-time-gutter,
+.rbc-time-content .rbc-time-gutter {
+  display: table-cell !important;
+  width: 70px !important;
+  min-width: 70px !important;
+  max-width: 70px !important;
+  position: relative;
+  z-index: 20;
+  background-color: #fafafa;
+}
+
+/* Saat etiketi metin stili */
+.rbc-time-content .rbc-time-gutter .rbc-label {
+  display: block !important;
+  visibility: visible !important;
+  font-size: 12px !important;
+  text-align: right !important;
+  padding-right: 8px !important;
+  color: #333;
+  font-weight: 500;
+  line-height: 22px !important;
+}
+
+/* Saat sütununun kapsayıcısı */
+.rbc-time-content > .rbc-time-gutter {
+  flex: none !important;
+  flex-basis: 70px !important;
+  flex-shrink: 0 !important;
+  overflow: visible !important;
+}
+
+/* Çalışma günü olmayan günler */
+.rbc-day-slot.non-working-day {
+  background-color: var(--non-working-day-bg);
+  border-left: 1px dashed var(--border-color);
+}
+
+/* Saat dilimlerinin genel stilleri */
+.rbc-time-slot {
+  transition: background-color 0.15s ease;
+  background-color: #ffffff;
+}

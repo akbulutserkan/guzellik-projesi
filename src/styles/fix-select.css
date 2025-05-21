@@ -1,0 +1,92 @@
+/* Son çare olarak inlin CSS şeklinde uygulanan stil */
+
+/* DOM içindeki tüm olası seçici kombinasyonları */
+
+/* Personel seçicilerin gerçekte kullandığı seçiciler */
+[class*="select"] button,
+[class*="select"] [class*="trigger"], 
+[class*="select"] [class*="value"],
+[class*="select"] span,
+[class*="select"] div,
+[class*="select"] *,
+[class*="radix"] button,
+[class*="radix"] span,
+[class*="radix"] div,
+[class*="radix"] *,
+[role*="combobox"],
+[role*="combobox"] *,
+div[role*="combobox"] span,
+span[class*="select"],
+div[class*="select"],
+button[class*="select"],
+[class*="Select"] {
+  max-width: 100% !important;
+  text-overflow: ellipsis !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  display: block !important;
+}
+
+/* Modallardaki personel seçici için */
+[class*="Dialog"] [class*="select"],
+[class*="dialog"] [class*="select"],
+[class*="Modal"] [class*="select"],
+[class*="modal"] [class*="select"],
+.dialog-content [class*="select"],
+.modal-content [class*="select"] {
+  max-width: 100% !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  text-overflow: ellipsis !important;
+}
+
+/* Dialog içindeki her şey için */
+[class*="Dialog"] *,
+[class*="dialog"] *,
+[class*="Modal"] *,
+[class*="modal"] * {
+  max-width: 100% !important;
+}
+
+/* Tüm dropdown öğeleri */
+[role="option"],
+[class*="option"],
+[class*="item"],
+[class*="Option"],
+[class*="Item"] {
+  white-space: nowrap !important;
+  overflow: hidden !important;  
+  text-overflow: ellipsis !important;
+  max-width: 100% !important;
+}
+
+/* Son çare - doğrudan Tailwind benzeri sınıflarla override */
+.truncate {
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+.overflow-hidden {
+  overflow: hidden !important;
+}
+
+.whitespace-nowrap {
+  white-space: nowrap !important;
+}
+
+.text-ellipsis {
+  text-overflow: ellipsis !important;
+}
+
+/* Uzun personel isimleri için tüm span elementleri */
+span {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  max-width: 100% !important;
+}
+
+/* HTML Satır içi stil olarak uygulanması gereken stiller:
+   style="max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: block;"
+*/

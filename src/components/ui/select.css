@@ -1,0 +1,69 @@
+/* Select bileşeni için özel truncate stilleri */
+.SelectTrigger,
+[class*="SelectTrigger"],
+[class*="select-trigger"],
+[class*="selectTrigger"],
+div[role="combobox"] {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  max-width: 100% !important;
+}
+
+.SelectValue,
+[class*="SelectValue"],
+[class*="select-value"],
+div[role="combobox"] span,
+[class*="selectValue"] {
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  max-width: 100% !important;
+  display: inline-block !important;
+}
+
+select,
+.select,
+[class*="select"],
+.dropdown,
+[class*="dropdown"],
+[role="listbox"] {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+.SelectContent,
+[class*="SelectContent"],
+[class*="selectContent"],
+[class*="select-content"] {
+  max-width: 100% !important;
+}
+
+.SelectContent .SelectItem,
+[class*="SelectContent"] [class*="SelectItem"],
+[class*="selectContent"] [class*="selectItem"],
+[class*="select-content"] [class*="select-item"] {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  max-width: 100% !important;
+}
+
+/* En spesifik selector - doğrudan modal içindeki select değerleri */
+.DialogContent select,
+.DialogContent [role="combobox"],
+.DialogContent [class*="Select"],
+.DialogContent [class*="select"] {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+.DialogContent [role="combobox"] span,
+.DialogContent [class*="Select"] span,
+.DialogContent [class*="select"] span {
+  display: inline-block !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}

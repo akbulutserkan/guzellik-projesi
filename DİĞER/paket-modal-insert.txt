@@ -1,0 +1,12 @@
+      {/* Paket Uyarı Modalı */}
+      <PackageWarningModal
+        isOpen={showPackageWarning}
+        onClose={() => {
+          setShowPackageWarning(false);
+          // Hizmet seçimini sıfırla
+          setFormData({...formData, serviceId: ''});
+          setServiceSearch('');
+        }}
+        packageInfo={packageInfo}
+        onUsePackage={handlePackageSessionUse}
+      />

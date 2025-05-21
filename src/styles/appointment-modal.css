@@ -1,0 +1,77 @@
+/* Personel seçici stil düzenlemeleri */
+.select-staff-button,
+[data-radix-select-trigger],
+button.SelectTrigger,
+select,
+.SelectTrigger {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  position: relative;
+}
+
+/* Özel hizmet modeli ve personel seçimi için */
+.personel-selector span,
+.personel-dropdown span,
+[class*="dropdown"] span,
+[class*="Dropdown"] span,
+.personel-button span {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  max-width: calc(100% - 20px) !important;
+  display: block !important;
+}
+
+/* Seçili değer için ellipsis desteği */
+[data-radix-select-value-wrapper],
+.SelectValue,
+[class*="SelectValue"],
+.SelectTrigger .SelectValue,
+select option {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  max-width: 100% !important;
+  display: block !important;
+  width: 90% !important; /* Bu önemli - kutunun kenarlarına taşmayı önlemek için */
+}
+
+/* Seçim kutularındaki metin için truncate */
+[data-slot="trigger"] span,
+[data-radix-select-value],
+[class*="select"] span,
+.select span,
+.SelectTrigger > span {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  display: block !important;
+  max-width: calc(100% - 24px) !important; /* Ok için alan bırakma */
+}
+
+/* Tüm dropdown ve select içerikleri için */
+.select-content span,
+.SelectContent span,
+[class*="SelectContent"] span,
+.SelectItem,
+.SelectItem span,
+button[role="option"] {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  max-width: 100% !important;
+}
+
+/* Randevu modallarındaki personel ismi gösterilen tüm componentlerde truncate uygula */
+.appointment-modal-staff,
+.modal-staff-name,
+[class*="appointment"] [class*="staff"],
+[class*="modal"] [class*="staff"],
+[class*="select"] [class*="staff"] {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}

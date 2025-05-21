@@ -1,0 +1,18 @@
+model Package {
+  // ... diğer alanlar
+  services Service[] @relation(fields: [id], references: [packages], onDelete: Cascade) // Ters ilişki eklendi
+}
+
+model Staff {
+  // ... diğer alanlar
+  services Service[]
+}
+
+model Service {
+  id String @id @default(cuid())
+  // ... other fields
+  staff Staff[] @relation(map:"ServiceToStaff")
+  packages Package[] @relation(map: "PackageToService")
+
+}
+
