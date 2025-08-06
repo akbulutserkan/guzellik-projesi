@@ -1,180 +1,278 @@
-/* İmport kuralları dosyanın başında olmalı */
-@import '../styles/base/variables.css';
-@import '../styles/base/layout.css';
-@import '../styles/calendar.css';
-@import './global-fix.css';
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 @layer base {
-    html, body {
-      height: 100%;
-      overflow: hidden;
-    }
   :root {
-        --background: 0 0% 100%;
-        --foreground: 0 0% 3.9%;
-        --card: 0 0% 100%;
-        --card-foreground: 0 0% 3.9%;
-        --popover: 0 0% 100%;
-        --popover-foreground: 0 0% 3.9%;
-        --primary: 0 0% 9%;
-        --primary-foreground: 0 0% 98%;
-        --secondary: 0 0% 96.1%;
-        --secondary-foreground: 0 0% 9%;
-        --muted: 0 0% 96.1%;
-        --muted-foreground: 0 0% 45.1%;
-        --accent: 0 0% 96.1%;
-        --accent-foreground: 0 0% 9%;
-        --destructive: 0 84.2% 60.2%;
-        --destructive-foreground: 0 0% 98%;
-        --border: 0 0% 89.8%;
-        --input: 0 0% 89.8%;
-        --ring: 0 0% 3.9%;
-        --chart-1: 12 76% 61%;
-        --chart-2: 173 58% 39%;
-        --chart-3: 197 37% 24%;
-        --chart-4: 43 74% 66%;
-        --chart-5: 27 87% 67%;
-        --radius: 0.5rem;
-    }
+    --background: 240 10% 99%; /* Very light gray, almost white */
+    --foreground: 240 10% 3.9%; /* Tailwind gray-900 */
+    --card: 240 10% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 240 10% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 217 91% 60%; /* Tailwind blue-500 */
+    --primary-foreground: 210 40% 98%;
+    --secondary: 240 4.8% 95.9%; /* Tailwind gray-100 */
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%; /* Tailwind gray-500 */
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 240 5.9% 90%; /* Tailwind gray-200 */
+    --input: 240 5.9% 90%;
+    --ring: 217 91% 60%; /* Tailwind blue-500 */
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+    --sidebar-background: 220 13% 97%; /* Very light, slightly cool gray (#f8f9fa) */
+    --sidebar-foreground: 240 5.9% 10%; /* Dark text for light sidebar */
+    --sidebar-primary: 217 91% 60%; /* Active sidebar item to match primary color */
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 5.9% 90%; /* Hover color */
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 240 5.9% 90%;
+    --sidebar-ring: 217 91% 70%;
+  }
   .dark {
-        --background: 0 0% 3.9%;
-        --foreground: 0 0% 98%;
-        --card: 0 0% 3.9%;
-        --card-foreground: 0 0% 98%;
-        --popover: 0 0% 3.9%;
-        --popover-foreground: 0 0% 98%;
-        --primary: 0 0% 98%;
-        --primary-foreground: 0 0% 9%;
-        --secondary: 0 0% 14.9%;
-        --secondary-foreground: 0 0% 98%;
-        --muted: 0 0% 14.9%;
-        --muted-foreground: 0 0% 63.9%;
-        --accent: 0 0% 14.9%;
-        --accent-foreground: 0 0% 98%;
-        --destructive: 0 62.8% 30.6%;
-        --destructive-foreground: 0 0% 98%;
-        --border: 0 0% 14.9%;
-        --input: 0 0% 14.9%;
-        --ring: 0 0% 83.1%;
-        --chart-1: 220 70% 50%;
-        --chart-2: 160 60% 45%;
-        --chart-3: 30 80% 55%;
-        --chart-4: 280 65% 60%;
-        --chart-5: 340 75% 55%;
-    }
+    --background: 240 10% 3.9%; /* Dark Gray */
+    --foreground: 210 40% 98%;
+    --card: 240 10% 100%; /* White card for dialog */
+    --card-foreground: 240 10% 3.9%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 217 91% 60%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+    --sidebar-background: 20 14.3% 4.1%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 217 91% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217 91% 70%;
+  }
 }
-
-/* Base Styles */
-
-/* Component Styles */
-
-/* Tüm HTML elementleri için outline gizleme */
-input, select, textarea, button, a, div, span {
-  outline: none !important;
-  outline-width: 0 !important;
-}
-
-/* Chrome, Safari, Edge için özel düzenleme */
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible,
-button:focus-visible {
-  outline: none !important;
-  box-shadow: none !important;
-  border-color: inherit !important;
-}
-
-/* Hizmet arama kutusunu çevreleyen div için */
-.bg-white input,
-.bg-gray-50 input {
-  border: none !important;
-  outline: none !important;
-}
-
-/* Özelleştirilmiş input style */
-input.outline-none-all,
-input.service-search-input {
-  outline: none !important;
-  box-shadow: none !important;
-  -webkit-appearance: none !important;
-  border: none !important;
-}
-
-/* Input parent container'larının da stylesini gizle */
-.border:focus-within,
-.rounded:focus-within,
-.rounded-md:focus-within,
-.rounded-lg:focus-within,
-.rounded-xl:focus-within,
-.input-container:focus-within {
-  box-shadow: none !important;
-  outline: none !important;
-  border-color: rgba(229, 231, 235, 1) !important; /* border-gray-200 */
-}
-
-/* Özel durum: Hizmet arama kutusu için genişletilmiş css */
-[placeholder="Hizmet ara..."],
-[placeholder*="ara"] {
-  box-shadow: none !important;
-  outline: none !important;
-  border: none !important;
-  border-color: transparent !important;
-}
-
-[placeholder="Hizmet ara..."]:focus,
-[placeholder*="ara"]:focus {
-  box-shadow: none !important;
-  outline: none !important;
-  border: none !important;
-  border-color: transparent !important;
-}
-
-/* Yardımcı Sınıflar */
-.text-truncate {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
-  display: block;
-}
-
-/* Özel Kaydırma Çubuğu */
-.scrollbar-custom {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(156, 163, 175, 0.5) rgba(229, 231, 235, 0.5);
-}
-
-.scrollbar-custom::-webkit-scrollbar {
-  width: 8px;
-}
-
-.scrollbar-custom::-webkit-scrollbar-track {
-  background: rgba(229, 231, 235, 0.5);
-  border-radius: 8px;
-}
-
-.scrollbar-custom::-webkit-scrollbar-thumb {
-  background-color: rgba(156, 163, 175, 0.5);
-  border-radius: 8px;
-  border: 2px solid transparent;
-  background-clip: content-box;
-}
-
-.scrollbar-custom::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(107, 114, 128, 0.7);
-}
-
-
 
 @layer base {
   * {
     @apply border-border;
-    }
+  }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border-width: 0;
     }
+}
+
+
+.product-form {
+  @apply max-w-md mx-auto mt-8 p-6 rounded-lg shadow-lg bg-card border border-border;
+}
+
+.product-form label {
+  @apply block text-sm font-medium text-card-foreground;
+}
+
+.product-form input {
+  /* Input component from shadcn/ui handles its own styling. This can be an override if needed */
+  @apply mt-1; 
+}
+
+/* Custom styles for react-big-calendar */
+
+/* General container */
+.rbc-calendar {
+    @apply h-full flex flex-col;
+}
+
+/* Header row (personnel names) */
+.rbc-time-header {
+    @apply bg-transparent border-b-2;
+}
+
+.rbc-time-header-content {
+    @apply border-y-0 border-x-0;
+}
+
+.rbc-time-header .rbc-header {
+    @apply p-2 border-b-0 border-x-0 h-auto;
+}
+
+.rbc-header {
+    @apply text-center text-sm font-semibold text-card-foreground p-3 m-1 bg-card rounded-lg shadow-md border-x-0;
+}
+
+.rbc-header.rbc-today {
+    @apply bg-primary/20 ring-2 ring-primary;
+}
+
+.rbc-header + .rbc-header {
+    @apply border-l-0;
+}
+
+/* Main content area */
+.rbc-time-content {
+    @apply flex-grow border-t-0;
+}
+
+.rbc-time-content > * + * > * {
+    @apply border-l-0;
+}
+
+/* Time gutter (saatlerin olduğu sol sütun) */
+.rbc-time-gutter {
+    @apply bg-card shadow-md rounded-lg mr-2;
+}
+
+.rbc-time-gutter .rbc-timeslot-group {
+    @apply border-b-0;
+}
+
+.rbc-time-gutter .rbc-time-slot {
+    @apply border-t-0;
+}
+
+.rbc-time-gutter .rbc-label {
+    @apply text-xs text-muted-foreground p-2 text-center;
+}
+
+/* Day columns */
+.rbc-day-slot .rbc-time-slot {
+    @apply border-t-0;
+}
+
+.rbc-day-bg + .rbc-day-bg {
+    @apply border-l-0;
+}
+
+.rbc-day-slot .rbc-day-bg {
+    @apply bg-card/50 rounded-lg mx-1;
+}
+
+/* Non-working day styling */
+.rbc-day-bg.rbc-off-range-bg {
+    background-color: hsl(var(--muted));
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Stil for non-working hours, now more distinct */
+.rbc-timeslot.rbc-off-range-slot-bg {
+    background-image: repeating-linear-gradient(
+        45deg,
+        hsla(var(--muted-foreground) / 0.1),
+        hsla(var(--muted-foreground) / 0.1) 10px,
+        hsla(var(--muted-foreground) / 0.15) 10px,
+        hsla(var(--muted-foreground) / 0.15) 20px
+    );
+    background-color: hsl(var(--muted));
+    opacity: 0.9;
+}
+
+
+/* Event styling */
+.rbc-event {
+    @apply bg-primary/80 border-primary/90 rounded-md p-1 shadow-sm;
+}
+
+.rbc-event.rbc-selected {
+    @apply bg-primary ring-2 ring-primary-foreground;
+}
+
+.rbc-event-label {
+    @apply text-xs;
+}
+
+.rbc-event-content {
+    @apply text-xs;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Modal kaydırma alanları için özel stil */
+.modal-scroll-area {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--muted-foreground)) transparent;
+  overflow-anchor: none; /* Kaydırma sarsıntısını önler */
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-scroll-area::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal-scroll-area::-webkit-scrollbar-thumb {
+  background-color: hsl(var(--muted-foreground));
+  border-radius: 3px;
+}
+
+/* Flexbox düzeltmeleri */
+.min-h-0 {
+  min-height: 0 !important;
+}
+
+.flex-grow {
+  flex-grow: 1;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ÇOK ÖNEMLİ: Flex container için gerekli stiller */
+.flex-container-fix {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  flex: 1 1 0%;
 }

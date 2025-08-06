@@ -1,0 +1,53 @@
+/* Sürülebilir başlıklar için stil */
+.rbc-resource-header {
+  user-select: none;
+  transition: opacity 0.2s, background-color 0.2s;
+  padding: 8px 4px;
+  border-radius: 4px;
+  margin: 2px 0;
+}
+
+.rbc-resource-header:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  cursor: move;
+}
+
+/* Sürükleme sırasında opacity */
+.opacity-50 {
+  opacity: 0.5 !important;
+}
+
+/* Takvimin genel stilini iyileştir */
+.rbc-time-header {
+  display: flex;
+  flex-direction: row; /* Dikey sıralamayı düzeltmek için 'row' yapıldı */
+}
+
+.rbc-time-header-content {
+  flex: 1;
+}
+
+.rbc-time-header-cell-single-day {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.rbc-time-header-cell {
+  min-width: 0;
+  flex: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Sürükle-bırak için görsel geri bildirim */
+.rbc-resource-header.dragging {
+  opacity: 0.5;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.rbc-resource-header.drag-over {
+  background-color: rgba(0, 123, 255, 0.1);
+  border: 1px dashed rgba(0, 123, 255, 0.5);
+}

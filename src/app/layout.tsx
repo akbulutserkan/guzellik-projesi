@@ -1,27 +1,37 @@
-// src/app/layout.tsx
-import { Inter } from 'next/font/google';
+import type {Metadata} from 'next';
+import {Geist, Geist_Mono} from 'next/font/google';
 import './globals.css';
-import AuthProvider from '@/components/providers/AuthProvider';  
-import ClientFetchInterceptor from '@/components/ClientFetchInterceptor';
-import Script from 'next/script';
+import { ClientLayoutWrapper } from '@/components/client-layout-wrapper';
+import { Toaster } from '@/components/ui/toaster';
 
+const geistSans = Geist({
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
+});
 
-const inter = Inter({ subsets: ['latin'] });
+const geistMono = Geist_Mono({
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
+});
+
+export const metadata: Metadata = {
+  title: 'Güzellik Merkezi Yönetimi',
+  description: 'Güzellik merkezi yönetimi projesi',
+};
 
 export default function RootLayout({
- children,
-}: {
- children: React.ReactNode;
-}) {
- return (
-   <html lang="tr" className="h-full">
-     <body className={`${inter.className} h-full`}>
-       <ClientFetchInterceptor />
-       <AuthProvider>
-         {children}
-
-       </AuthProvider>
-     </body>
-   </html>
- );
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="tr">
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <ClientLayoutWrapper>
+          {children}
+        </ClientLayoutWrapper>
+        <Toaster />
+      </body>
+    </html>
+  );
 }

@@ -1,0 +1,14 @@
+
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Sunucudan gelen ve kimliği doğrulanmış tüm isteklere
+    // tüm koleksiyonlar için okuma ve yazma izni ver.
+    // Bu, Firebase Admin SDK'nın düzgün çalışması için gereklidir.
+    // İstemci tarafı (tarayıcı) erişimi yine de kısıtlı olacaktır.
+    match /{document=**} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}
