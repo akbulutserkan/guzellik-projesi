@@ -69,39 +69,37 @@ export async function getPaymentTransactionsAction(): Promise<EnrichedPaymentTra
     }
 
     try {
-        console.log("[KASA_LOG] Fetching all payment transactions from Firestore.");
-        const paymentTransactionsSnapshot = await db.collection("paymentTransactions").orderBy("paymentDate", "desc").get();
-        console.log(`[KASA_LOG] Found ${paymentTransactionsSnapshot.docs.length} total payment transaction documents.`);
+        console.log("[KASA_LOG] Fetching all related data for payment transactions.");
 
+        const [
+            paymentTransactionsSnapshot,
+            appointmentsSnap,
+            salesSnap,
+            packageSalesSnap,
+            personnelSnap
+        ] = await Promise.all([
+            db.collection("paymentTransactions").orderBy("paymentDate", "desc").get(),
+            db.collection("appointments").get(),
+            db.collection("sales").get(),
+            db.collection("packageSales").get(),
+            db.collection("personnel").get()
+        ]);
+
+        console.log(`[KASA_LOG] Found ${paymentTransactionsSnapshot.docs.length} total payment transaction documents.`);
         if (paymentTransactionsSnapshot.empty) {
             return [];
         }
 
-        // Log the first document's data to check its structure
-        if (paymentTransactionsSnapshot.docs.length > 0) {
-            console.log("[KASA_LOG] Sample data from the first payment transaction document:", paymentTransactionsSnapshot.docs[0].data());
-        }
-
-        const rawPayments = paymentTransactionsSnapshot.docs.map(doc => ({
-            id: doc.id,
-            ...doc.data(),
-            paymentDate: (doc.data().paymentDate as Timestamp).toDate(),
-        } as PaymentTransaction));
-
-        // Get all related data in parallel
-        const appointmentGroupIds = [...new Set(rawPayments.map(p => p.appointmentGroupId).filter(Boolean))];
-        
-        const packageSalePromises = appointmentGroupIds.map(id => db.collection("packageSales").doc(id).get());
-
-        const [appointmentsSnap, salesSnap, packageSalesDocs] = await Promise.all([
-            appointmentGroupIds.length ? db.collection("appointments").where("groupId", "in", appointmentGroupIds).get() : Promise.resolve({ docs: [] }),
-            appointmentGroupIds.length ? db.collection("sales").where("appointmentGroupId", "in", appointmentGroupIds).get() : Promise.resolve({ docs: [] }),
-            Promise.all(packageSalePromises)
-        ]);
+        const personnelMap = new Map<string, string>();
+        personnelSnap.docs.forEach(doc => {
+            const data = doc.data();
+            personnelMap.set(doc.id, data.fullName);
+        });
 
         const appointmentsByGroupId = new Map<string, Appointment[]>();
         appointmentsSnap.docs.forEach(doc => {
             const app = { id: doc.id, ...doc.data() } as Appointment;
+            app.personnelName = personnelMap.get(app.personnelId) || app.personnelName;
             const group = appointmentsByGroupId.get(app.groupId) || [];
             group.push(app);
             appointmentsByGroupId.set(app.groupId, group);
@@ -110,6 +108,9 @@ export async function getPaymentTransactionsAction(): Promise<EnrichedPaymentTra
         const salesByGroupId = new Map<string, Sale[]>();
         salesSnap.docs.forEach(doc => {
             const sale = { id: doc.id, ...doc.data() } as Sale;
+            if (sale.personnelId) {
+                sale.personnelName = personnelMap.get(sale.personnelId) || sale.personnelName;
+            }
             if (sale.appointmentGroupId) {
                 const group = salesByGroupId.get(sale.appointmentGroupId) || [];
                 group.push(sale);
@@ -118,15 +119,20 @@ export async function getPaymentTransactionsAction(): Promise<EnrichedPaymentTra
         });
 
         const packageSalesById = new Map<string, PackageSale>();
-        packageSalesDocs.forEach(doc => {
-            if (doc.exists) {
-                const data = doc.data();
-                if(data){
-                    packageSalesById.set(doc.id, { id: doc.id, ...data } as PackageSale);
-                }
+        packageSalesSnap.docs.forEach(doc => {
+            const sale = { id: doc.id, ...doc.data() } as PackageSale;
+            if (sale.personnelId) {
+                sale.personnelName = personnelMap.get(sale.personnelId) || sale.personnelName;
             }
+            packageSalesById.set(doc.id, sale);
         });
-        
+
+        const rawPayments = paymentTransactionsSnapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data(),
+            paymentDate: (doc.data().paymentDate as Timestamp).toDate(),
+        } as PaymentTransaction));
+
         const transactions: EnrichedPaymentTransaction[] = [];
         for (const payment of rawPayments) {
              try {
@@ -140,8 +146,8 @@ export async function getPaymentTransactionsAction(): Promise<EnrichedPaymentTra
                 if (dbPaymentType === 'package') {
                     const sale = packageSalesById.get(groupId);
                     if (sale) {
-                        const saleDate = (sale.saleDate as any).toDate ? (sale.saleDate as any).toDate() : new Date(sale.saleDate);
                         personnelName = sale.personnelName || "-";
+                        const saleDate = (sale.saleDate as any).toDate ? (sale.saleDate as any).toDate() : new Date(sale.saleDate);
                         if (isSameDay(saleDate, payment.paymentDate)) {
                             description = `Paket Satışı: ${sale.packageName}`;
                             enrichedPaymentType = 'package_sale';
